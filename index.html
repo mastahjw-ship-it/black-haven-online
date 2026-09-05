@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Black Haven Online V10000000 — Web Release</title>
+<link rel="stylesheet" href="styles.css">
+
+<style id="livingCityV3000000Styles">
+/* Black Haven V3000000 — Living City Update */
+.lcGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px}
+.lcCard{padding:11px;border-radius:14px;background:linear-gradient(180deg,rgba(16,27,42,.96),rgba(7,13,22,.97));border:1px solid rgba(121,209,255,.15);box-shadow:0 12px 28px rgba(0,0,0,.22)}
+.lcCard h4{margin:0 0 5px;font-size:12px;color:#f7fbff}.lcCard p{margin:0 0 8px;font-size:9px;line-height:1.45;color:#bdc9d6}.lcMeta{font-size:8px;color:#93a7ba}.lcMeter{height:6px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;margin:6px 0}.lcMeter i{display:block;height:100%;background:linear-gradient(90deg,#69c7ff,#84ef79)}
+.lcPills{display:flex;gap:5px;flex-wrap:wrap;margin:7px 0}.lcPill{padding:4px 7px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font:800 8px system-ui;color:#dce7f2}
+.lcHeadline{padding:10px;border-radius:13px;background:rgba(116,201,255,.06);border:1px solid rgba(116,201,255,.13);font-size:9px;color:#dbe8f4;margin:8px 0}
+.lcNpcRow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06)}.lcNpcRow:last-child{border-bottom:0}
+.lcMood{font-size:18px}.lcGood{color:#8cef7d}.lcWarn{color:#ffd06b}.lcBad{color:#ff7a8b}
+@media(max-width:560px){.lcGrid{grid-template-columns:1fr}.lcCard{padding:9px}}
+</style>
+
+
+<style id="livingNpcsV4000000Styles">
+/* Black Haven V4000000 — Living NPCs */
+.npcLifeGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
+.npcLifeCard{padding:12px;border-radius:15px;background:linear-gradient(180deg,rgba(20,29,45,.97),rgba(8,14,23,.98));border:1px solid rgba(209,140,255,.15);box-shadow:0 14px 30px rgba(0,0,0,.25)}
+.npcLifeCard h4{margin:0 0 4px;font-size:12px}.npcLifeCard p{margin:4px 0 8px;font-size:9px;line-height:1.45;color:#bfccda}
+.npcLifeTags{display:flex;flex-wrap:wrap;gap:5px;margin:7px 0}.npcLifeTag{padding:4px 7px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-size:8px;font-weight:800;color:#dfe8f2}
+.npcTimeline{margin-top:8px;padding-left:12px;border-left:2px solid rgba(122,247,255,.18)}.npcTimeline div{font-size:8px;color:#aebdcb;margin:5px 0}.npcTimeline b{color:#eef6ff}
+.cityStory{padding:10px 11px;border-radius:13px;background:linear-gradient(135deg,rgba(122,247,255,.06),rgba(209,140,255,.05));border:1px solid rgba(122,247,255,.12);font-size:9px;line-height:1.5;color:#dce8f3;margin:8px 0}
+.npcRelationGood{color:#8bef82}.npcRelationMid{color:#ffd16d}.npcRelationBad{color:#ff8292}
+@media(max-width:560px){.npcLifeGrid{grid-template-columns:1fr}.npcLifeCard{padding:10px}}
+</style>
+
+
+<style id="chronicleV5000000Styles">
+/* Black Haven V5000000 — Chronicle */
+.chronicleHero{padding:14px;border-radius:16px;background:linear-gradient(135deg,rgba(243,207,122,.09),rgba(122,247,255,.045));border:1px solid rgba(243,207,122,.18);margin-bottom:12px}
+.chronicleHero b{color:#f3cf7a;letter-spacing:.08em}.chronicleGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.chronicleCard{padding:11px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.chronicleCard h4{margin:0 0 5px;font:900 12px system-ui;color:#f8fbff}.chronicleCard p{margin:0;font:600 9px/1.45 system-ui;color:#c8d3df}.chronicleDay{font:900 9px system-ui;color:#f3cf7a;margin-bottom:4px}.chronicleTags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.chronicleTag{padding:4px 7px;border-radius:999px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);font:800 7px system-ui;color:#dce7f2}.chronicleMajor{border-color:rgba(243,207,122,.28);box-shadow:0 0 22px rgba(243,207,122,.05)}
+.recordValue{font-size:22px;font-weight:950;color:#fff}.eraLine{padding:10px 12px;border-left:3px solid rgba(122,247,255,.35);background:rgba(122,247,255,.035);margin:8px 0;border-radius:0 12px 12px 0}.eraLine b{color:#7af7ff}.legendName{font-size:16px;font-weight:950;color:#f3cf7a}.chronicleStat{font-size:20px;font-weight:950;color:#fff}
+@media(max-width:560px){.chronicleGrid{grid-template-columns:1fr}.chronicleCard{padding:9px}}
+</style>
+
+
+<meta name="description" content="Black Haven Online — a living city, crime, life and empire simulation.">
+<meta name="theme-color" content="#07111b">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<div id="releaseLoader" aria-label="Laddar Black Haven">
+  <div class="releaseLoaderCard">
+    <div class="releaseLogoMark">BH</div>
+    <div class="releaseLoaderTitle">BLACK HAVEN</div>
+    <div class="releaseLoaderSub">ONLINE · WEB RELEASE</div>
+    <div class="releaseLoadBar"><i></i></div>
+    <div class="releaseLoaderHint">Laddar stad, system och sparfil…</div>
+  </div>
+</div>
+
+<div id="wrap"><div id="cinematicVignette"></div><div id="versionChip">V2010000 · THREE WORLDS LAYOUT FIX</div>
+<div id="lifePanel">
+  <div class="lifeHead">
+    <div class="lifeAvatar">🧍</div>
+    <div>
+      <div class="lifeName">Din karaktär</div>
+      <div class="lifeMood" id="lifeMood">Fokuserad</div>
+    </div>
+  </div>
+  <div class="needRow"><span>Energi</span><div class="needBar"><i id="needEnergy"></i></div><b id="needEnergyTxt">100</b></div>
+  <div class="needRow"><span>Hälsa</span><div class="needBar"><i id="needHealth"></i></div><b id="needHealthTxt">100</b></div>
+  <div class="needRow"><span>Trygghet</span><div class="needBar"><i id="needSafety"></i></div><b id="needSafetyTxt">80</b></div>
+  <div class="needRow"><span>Socialt</span><div class="needBar"><i id="needSocial"></i></div><b id="needSocialTxt">65</b></div>
+  <div class="needRow"><span>Status</span><div class="needBar"><i id="needStatus"></i></div><b id="needStatusTxt">40</b></div><div class="needRow"><span>Komfort</span><div class="needBar"><i id="needComfort"></i></div><b id="needComfortTxt">55</b></div>
+</div>
+<div id="lifeGem"></div>
+<div id="worldStatus">
+ <div class="wsTitle">BLACK HAVEN LIVE</div>
+ <div class="wsRow"><span>Område</span><b id="wsDistrict">-</b></div>
+ <div class="wsRow"><span>Stämning</span><b id="wsMood">Lugn</b></div>
+ <div class="wsRow"><span>Polisnivå</span><b id="wsPolice">Låg</b></div>
+ <div class="wsRow"><span>Nattliv</span><b id="wsNightlife">Aktivt</b></div>
+ <div class="wsRow"><span>Ekonomi</span><b id="wsEconomy">Stabil</b></div>
+</div>
+<div id="socialBubble"></div>
+<div id="megaStatus">
+ <div class="megaPill">Dag <b id="megaDay">1</b></div>
+ <div class="megaPill">Tid <b id="megaTime">22:47</b></div>
+ <div class="megaPill">Rykte <b id="megaRep">0</b></div>
+ <div class="megaPill">Cash <b id="megaCash">0</b></div>
+ <div class="megaPill">Heat <b id="megaHeat">0</b></div>
+</div>
+<canvas id="districtPulse"></canvas>
+
+
+
+
+<div class="threeWorldsPanel">
+ <div class="twHeader"><b>THREE WORLDS LAYOUT FIX</b><span id="twSynergyLabel">Synergy 0%</span></div>
+ <div class="twGrid">
+  <div class="twCard twCrime"><span>CRIME</span><b id="twCrimeLevel">Lv 1</b><small id="twCrimeScore">0 score</small></div>
+  <div class="twCard twLife"><span>LIFE</span><b id="twLifeLevel">Lv 1</b><small id="twLifeScore">0 score</small></div>
+  <div class="twCard twEmpire"><span>EMPIRE</span><b id="twEmpireLevel">Lv 1</b><small id="twEmpireScore">0 score</small></div>
+ </div>
+ <div class="twSynergy"><i id="twSynergyBar"></i></div>
+</div>
+
+<div class="universeStrip">
+ <div class="uniChip"><span>IDENTITET</span><b id="identityHud">Okänd</b></div>
+ <div class="uniChip"><span>LEGACY</span><b id="legacyHud">Gen 1</b></div>
+ <div class="uniChip"><span>MYSTERY</span><b id="mysteryHud">Kap 1</b></div>
+ <div class="uniChip"><span>PUBLIC IMAGE</span><b id="imageHud">Skuggfigur</b></div>
+ <div class="uniChip"><span>SEASON</span><b id="themeHud">Neon Winter</b></div>
+</div>
+
+<div class="empireStrip">
+ <div class="empireChip"><span>KARRIÄR</span><b id="careerHud">Ingen</b></div>
+ <div class="empireChip"><span>TERRITORIER</span><b id="territoryHud">0</b></div>
+ <div class="empireChip"><span>CREW</span><b id="crewHud">2</b></div>
+ <div class="empireChip"><span>PRESTIGE</span><b id="prestigeHud">0</b></div>
+</div>
+
+<div id="crimeSeasonHud">
+  <b>THREE WORLDS LAYOUT FIX · DAG <span id="seasonDay">1</span>/30</b>
+  <div class="crimeSeasonRow"><span>Rank</span><strong id="seasonRank">#128</strong></div>
+  <div class="crimeSeasonRow"><span>Season score</span><strong id="seasonScore">0</strong></div>
+  <div class="crimeSeasonRow"><span>Street cred</span><strong id="streetCred">0</strong></div>
+  <div class="crimeMeter"><i id="seasonProgress"></i></div>
+</div>
+
+<div id="housingPanel">
+  <div class="hpTitle">
+    <span>HEM & BYGG <span class="builderTag">LIVE</span></span>
+    <span id="housingCurrentLot">Starter Lot</span>
+  </div>
+  <div class="hpGrid">
+    <div class="hpCard"><b>Hemstatus</b><span id="homeSummary">Inget större hem ännu</span><div class="hpMeter"><i id="homeMeter"></i></div></div>
+    <div class="hpCard"><b>Komfort</b><span id="homeComfortTxt">0</span><div class="hpMeter"><i id="homeComfortBar"></i></div></div>
+    <div class="hpCard"><b>Design</b><span id="homeStyleTxt">Nordic</span><div class="hpMeter"><i id="homeStyleBar"></i></div></div>
+    <div class="hpCard"><b>Värde</b><span id="homeValueTxt">0 kr</span><div class="hpMeter"><i id="homeValueBar"></i></div></div>
+  </div>
+</div>
+
+
+
+
+<canvas id="game"></canvas>
+<div class="hud">
+ <div class="top"><div class="logo">BLACK HAVEN<small>ONLINE · V2010000</small></div><div class="loc"><span id="district">Central District</span><br><span id="clock">22:47</span></div></div>
+ <div class="stats">
+  <div class="stat"><span>Kontant</span><b id="cash"></b></div>
+  <div class="stat"><span>Respekt</span><b id="respect"></b><div class="bar"><i id="repBar" style="background:var(--blue)"></i></div></div>
+  <div class="stat"><span>HP</span><b id="hp"></b><div class="bar"><i id="hpBar" style="background:var(--red)"></i></div></div>
+  <div class="stat"><span>Stamina</span><b id="energy"></b><div class="bar"><i id="energyBar" style="background:var(--green)"></i></div></div>
+  <div class="stat"><span>Heat</span><b id="heat"></b><div class="bar"><i id="heatBar" style="background:var(--orange)"></i></div></div>
+  <div class="stat"><span>Bank</span><b id="bank"></b></div>
+  <div class="stat"><span>Diamanter</span><b id="diamonds"></b></div>
+  <div class="stat"><span>Fordon</span><b id="vehicle"></b></div>
+  <div class="stat"><span>Netto</span><b id="networth"></b></div>
+ </div>
+</div>
+
+<button class="megaMenuBtn" onclick="openMainMenu()">☰ BLACK HAVEN MENY</button>
+
+<div class="quest"><b>Aktivt uppdrag</b><span id="questText"></span></div>
+<div class="event"><b>LIVE EVENT</b><div id="eventText">Nattmarknaden öppnar snart.</div></div>
+<div id="weather" class="weather">🌧 Regn · 8°C</div>
+<div class="minimap"><canvas id="mini" width="118" height="118"></canvas></div>
+<div id="interiorTag" class="interiorTag">INTERIÖR</div>
+
+<div id="joy" class="joy"><div id="stick" class="stick"></div></div>
+<div class="actions">
+ <button id="attackBtn" class="action red">ATTACK</button>
+ <button id="interactBtn" class="action primary">INTERAGERA</button>
+ <button id="driveBtn" class="action cyan">KÖR</button>
+</div>
+
+<div class="bottom">
+ <button class="active"><strong>🗺️</strong><span>Stad</span></button>
+ <button onclick="openCrimeHub()"><strong>🕶️</strong><span>Street</span></button>
+ <button onclick="openMegaPhone()"><strong>📱</strong><span>Telefon</span></button>
+ <button onclick="openHousingBuilder()"><strong>🏠</strong><span>Bo & Bygg</span></button>
+ <button onclick="openCharacter()"><strong>👤</strong><span>Profil</span></button>
+ <button onclick="openMainMenu()"><strong>☰</strong><span>Mer</span></button>
+</div>
+<button class="menuFab" onclick="openMenu()">☰ MENY</button>
+
+<div id="toast" class="toast"></div>
+<div id="overlay" class="overlay" onclick="if(event.target.id==='overlay')closeSheet()">
+ <div class="sheet"><div id="badges"></div><h2 id="sheetTitle"></h2><p id="sheetText"></p><div id="sheetExtra"></div><div id="sheetActions" class="row"></div><br><button class="btn alt" onclick="closeSheet()">STÄNG</button></div>
+</div>
+<div id="storyflash" class="storyflash"><div class="box"><h1 id="storyTitle">BLACK HAVEN</h1><p id="storyText"></p><button class="btn" onclick="closeStory()">FORTSÄTT</button></div></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<style id="v6SocietyStyle">
+/* V6000000 — Society & Power */
+.s6Hero{padding:13px;border-radius:16px;background:linear-gradient(135deg,rgba(242,206,120,.11),rgba(122,247,255,.05));border:1px solid rgba(242,206,120,.22);margin:10px 0}
+.s6Grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px}.s6Card{padding:11px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.085)}
+.s6Card h4{margin:0 0 5px;font-size:12px}.s6Card p{margin:0;font-size:9px;line-height:1.45;color:#c9d4df}.s6Value{font-size:22px;font-weight:950;color:#fff}.s6Sub{font-size:8px;color:#9fb0c2}.s6Pill{display:inline-block;padding:4px 7px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:8px;margin:3px 4px 0 0}.s6Good{color:#8cf08a}.s6Bad{color:#ff8b9b}.s6Gold{color:#f3cf7a}.s6Cyan{color:#7af7ff}.s6Bar{height:7px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:6px}.s6Bar i{display:block;height:100%;background:linear-gradient(90deg,#7af7ff,#f3cf7a)}
+.s6Feed{max-height:340px;overflow:auto}.s6FeedItem{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:9px;line-height:1.4}.s6FeedItem b{color:#fff}.s6Family{padding:10px;border-left:3px solid #d492ff;background:rgba(212,146,255,.05);border-radius:8px;margin:7px 0}.s6Law{padding:9px;border-radius:12px;background:rgba(122,247,255,.05);border:1px solid rgba(122,247,255,.12);margin:6px 0}.s6Rival{padding:10px;border-radius:13px;background:rgba(255,112,130,.05);border:1px solid rgba(255,112,130,.13);margin:7px 0}.s6Tabs{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.s6Tabs .btn{flex:1 1 95px}.s6Mini{font-size:8px;color:#a9b7c7}.s6Headline{font-size:13px;font-weight:900;color:#fff;margin-bottom:4px}
+#societyPulse6{position:absolute;left:50%;transform:translateX(-50%);top:calc(78px + var(--safe-top));z-index:26;display:flex;gap:8px;padding:6px 9px;border-radius:999px;background:rgba(7,13,22,.88);border:1px solid rgba(242,206,120,.16);backdrop-filter:blur(10px);pointer-events:none;font:800 7px system-ui;color:#cbd7e3}
+#societyPulse6 b{color:#fff}@media(max-width:780px){.s6Grid{grid-template-columns:1fr}#societyPulse6{top:calc(76px + var(--safe-top));max-width:80vw;overflow:hidden}.s6Pill:nth-child(n+8){display:none}}
+</style>
+
+
+
+
+
+<script src="game.js"></script>
+</body>
+</html>
