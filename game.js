@@ -3536,3 +3536,28 @@ setInterval(()=>{let h=Math.floor(state.time),mm=Math.floor((state.time-h)*60);c
   });
   window.addEventListener('error',e=>{try{console.error('Black Haven runtime error:',e.error||e.message)}catch(_){}});
 })();
+
+/* =========================================================
+   V11000000 — THREE WORLDS NAVIGATION
+   ========================================================= */
+(function(){
+  const worlds={
+    crime:{title:'CRIME',sub:'Gatan, riskerna och makten.',hero:'Bygg ditt rykte i Black Havens undre värld. Brott ger snabbare pengar och respekt, men höjer heat och risk.',cls:'crime',actions:[['🕶️','Crime Hub','Brott, street cred och säsongsprogression','openCrimeHub'],['💥','Gör ett brott','Ta en direkt risk för pengar och respekt','runCrime'],['🌙','Nattliv','Besök klubbscenen och stadens kontakter','visitCrimeClub'],['👥','Gang','Bygg eller utveckla ditt kriminella nätverk','openGangV200'],['🛒','Svarta marknaden','Köp och sälj via marknaden','openMarketplace'],['🗺️','Tillbaka till staden','Återvänd till Black Haven','__close']]},
+    life:{title:'LIFE',sub:'Relationer, vardag och vem du blir.',hero:'Livet utanför gatan spelar roll. Energi, hälsa, socialt liv, boende och relationer påverkar vilka vägar som öppnas.',cls:'life',actions:[['❤️','Life Hub','Överblick över behov, humör och liv','openLifeHub'],['🏠','Bo & bygg','Utveckla ditt hem och din komfort','openHousingBuilder'],['💬','Socialt','Kontakter, meddelanden och relationer','openSocialHub'],['💼','Jobb','Arbeta lagligt och bygg en stabil vardag','openJobs'],['🧍','Karaktär','Se profil, utveckling och identitet','openCharacter'],['🗺️','Tillbaka till staden','Återvänd till Black Haven','__close']]},
+    empire:{title:'EMPIRE',sub:'Företag, fastigheter och långsiktig makt.',hero:'Förvandla pengar och inflytande till ett imperium. Företag, investeringar, personal och tillgångar bygger din långsiktiga makt.',cls:'empire',actions:[['🏢','Empire Hub','Överblick över ditt ekonomiska imperium','openEmpireHub'],['💼','Företag','Köp och utveckla verksamheter','openEmpire'],['🏠','Fastigheter','Bygg värde genom boende och egendom','openHousingBuilder'],['📈','Marknad','Handla och hitta nya möjligheter','openMarketplace'],['🎓','Karriär','Välj väg och bygg professionell status','selectCareer'],['🗺️','Tillbaka till staden','Återvänd till Black Haven','__close']]}
+  };
+  function safeCall(name){closeWorld();const fn=window[name];if(typeof fn==='function'){setTimeout(()=>{try{fn()}catch(e){console.warn('V11 action',name,e)}},40)}}
+  function closeWorld(){const el=document.getElementById('v11WorldOverlay');if(el)el.classList.remove('open')}
+  function openWorld(key){const w=worlds[key];if(!w)return;const el=document.getElementById('v11WorldOverlay');el.innerHTML=`<div class="v11WorldShell"><div class="v11WorldHead"><button class="btn alt v11Back" data-v11-close>← STADEN</button><div class="v11WorldTitle"><h1>${w.title}</h1><p>${w.sub}</p></div><div class="v11WorldStats"><span class="v11Pill">Dag <b>${document.getElementById('megaDay')?.textContent||'—'}</b></span><span class="v11Pill">Cash <b>${document.getElementById('megaCash')?.textContent||document.getElementById('cash')?.textContent||'—'}</b></span></div></div><section class="v11WorldHero ${w.cls}"><div><h2>${w.title}</h2><p>${w.hero}</p></div></section><div class="v11ActionGrid">${w.actions.map((a,i)=>`<button class="v11ActionCard" data-v11-action="${a[3]}"><span class="v11ActionIcon">${a[0]}</span><b>${a[1]}</b><small>${a[2]}</small></button>`).join('')}</div></div>`;el.classList.add('open');el.scrollTop=0}
+  function init(){
+    if(document.getElementById('v11WorldOverlay'))return;
+    const overlay=document.createElement('div');overlay.id='v11WorldOverlay';overlay.setAttribute('aria-modal','true');document.body.appendChild(overlay);
+    const sw=document.createElement('nav');sw.id='v11WorldSwitcher';sw.setAttribute('aria-label','Tre världar');sw.innerHTML='<button data-world="crime">🕶️ CRIME</button><button data-world="life">❤️ LIFE</button><button data-world="empire">🏢 EMPIRE</button>';document.body.appendChild(sw);
+    sw.addEventListener('click',e=>{const b=e.target.closest('[data-world]');if(b)openWorld(b.dataset.world)});
+    overlay.addEventListener('click',e=>{if(e.target.closest('[data-v11-close]'))return closeWorld();const b=e.target.closest('[data-v11-action]');if(!b)return;b.dataset.v11Action==='__close'?closeWorld():safeCall(b.dataset.v11Action)});
+    document.querySelectorAll('.twCard').forEach((card,i)=>{card.tabIndex=0;card.setAttribute('role','button');card.addEventListener('click',()=>openWorld(['crime','life','empire'][i]));card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openWorld(['crime','life','empire'][i])}})});
+    window.openV11World=openWorld;window.closeV11World=closeWorld;
+    const chip=document.getElementById('versionChip');if(chip)chip.textContent='V11000000';document.title='Black Haven Online V11000000';
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();

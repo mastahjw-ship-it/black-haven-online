@@ -2563,3 +2563,45 @@ button:focus-visible,.btn:focus-visible,input:focus-visible,textarea:focus-visib
 .releaseLoaderHint{font:600 10px/1.4 system-ui;color:#9fb0c4}
 @keyframes releaseLoad{from{transform:translateX(-75%);width:35%}to{transform:translateX(185%);width:45%}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.releaseLoadBar i{animation:none;width:100%}}
+
+/* =========================================================
+   V11000000 — RESPONSIVE WORLD LAYOUT / OVERLAP FIX
+   ========================================================= */
+:root{--v11-gap:clamp(8px,1.6vw,16px);--v11-dock:72px}
+*{box-sizing:border-box}html,body{max-width:100%;overflow-x:hidden}button{touch-action:manipulation}
+#wrap{min-height:100dvh;padding-bottom:calc(var(--v11-dock) + env(safe-area-inset-bottom,0px))}
+.twCard{cursor:pointer;min-width:0;isolation:isolate;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.twCard:hover,.twCard:focus-visible{transform:translateY(-2px);border-color:rgba(122,247,255,.42);box-shadow:0 12px 34px rgba(0,0,0,.35)}
+.twCard:focus-visible{outline:2px solid #7af7ff;outline-offset:3px}
+.actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px!important;left:50%!important;transform:translateX(-50%);width:min(540px,calc(100vw - 28px));bottom:calc(var(--v11-dock) + 10px + env(safe-area-inset-bottom,0px))!important}
+.actions .action{min-width:0!important;width:100%!important;white-space:normal!important;line-height:1.05;overflow:hidden;text-overflow:ellipsis}
+.bottom{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px!important;height:auto!important;min-height:var(--v11-dock);padding:7px max(7px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom,0px)) max(7px,env(safe-area-inset-left))!important}
+.bottom button{min-width:0!important;width:100%!important;padding:7px 3px!important;overflow:hidden}.bottom button span{font-size:clamp(7px,2.1vw,10px)!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bottom button strong{font-size:18px}
+.megaMenuBtn,.menuFab{max-width:calc(100vw - 24px);white-space:normal}
+.sheet{width:min(760px,calc(100vw - 18px))!important;max-height:min(86dvh,900px)!important;overflow:auto!important;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))!important}
+.sheet .row{display:flex;flex-wrap:wrap;gap:8px}.sheet .row>.btn,.sheetActions .btn{flex:1 1 150px;min-width:0}
+#lifePanel,#worldStatus,#crimeSeasonHud,.empireStrip,.housingPanel{max-width:calc(100vw - 16px)}
+#societyPulse6{max-width:calc(100vw - 24px)!important}
+
+/* World switcher — always visible, never overlaps bottom controls */
+#v11WorldSwitcher{position:fixed;z-index:90;left:50%;transform:translateX(-50%);bottom:calc(var(--v11-dock) + 82px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:min(430px,calc(100vw - 24px));padding:6px;border-radius:18px;background:rgba(5,10,17,.90);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(18px);box-shadow:0 16px 45px rgba(0,0,0,.42)}
+#v11WorldSwitcher button{min-width:0;border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:10px 6px;background:rgba(255,255,255,.045);color:#fff;font:900 10px system-ui;letter-spacing:.08em}
+#v11WorldSwitcher button[data-world="crime"]{box-shadow:inset 3px 0 #ff566d}#v11WorldSwitcher button[data-world="life"]{box-shadow:inset 3px 0 #5de07c}#v11WorldSwitcher button[data-world="empire"]{box-shadow:inset 3px 0 #5aa8ff}
+
+#v11WorldOverlay{position:fixed;inset:0;z-index:250;display:none;background:linear-gradient(180deg,rgba(2,7,13,.97),rgba(6,12,21,.985));overflow:auto;padding:calc(14px + env(safe-area-inset-top,0px)) 14px calc(24px + env(safe-area-inset-bottom,0px));color:#eef7ff}
+#v11WorldOverlay.open{display:block}.v11WorldShell{width:min(1120px,100%);margin:auto}.v11WorldHead{position:sticky;top:0;z-index:3;display:flex;align-items:center;gap:12px;padding:12px;border-radius:18px;background:rgba(7,13,22,.94);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(16px)}
+.v11WorldHead .v11Back{flex:0 0 auto}.v11WorldTitle{min-width:0;flex:1}.v11WorldTitle h1{margin:0;font:950 clamp(24px,5vw,42px)/1 system-ui;letter-spacing:.05em}.v11WorldTitle p{margin:5px 0 0;color:#9fb0c2;font:600 11px system-ui}.v11WorldStats{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}.v11Pill{padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);font:800 9px system-ui}
+.v11WorldHero{margin-top:var(--v11-gap);padding:clamp(16px,4vw,34px);min-height:180px;border-radius:24px;border:1px solid rgba(255,255,255,.10);display:flex;align-items:flex-end;box-shadow:inset 0 -80px 100px rgba(0,0,0,.35)}.v11WorldHero.crime{background:radial-gradient(circle at 75% 20%,rgba(255,70,95,.24),transparent 35%),linear-gradient(135deg,#1b0b11,#080d15)}.v11WorldHero.life{background:radial-gradient(circle at 75% 20%,rgba(70,230,125,.20),transparent 35%),linear-gradient(135deg,#081a13,#080d15)}.v11WorldHero.empire{background:radial-gradient(circle at 75% 20%,rgba(65,145,255,.24),transparent 35%),linear-gradient(135deg,#081425,#080d15)}
+.v11WorldHero h2{margin:0 0 7px;font:950 clamp(25px,5vw,44px)/1 system-ui}.v11WorldHero p{margin:0;max-width:650px;color:#c8d5e2;font:600 12px/1.55 system-ui}
+.v11ActionGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--v11-gap);margin-top:var(--v11-gap)}.v11ActionCard{min-width:0;text-align:left;padding:18px;border-radius:20px;background:linear-gradient(180deg,rgba(18,28,43,.96),rgba(8,14,23,.98));border:1px solid rgba(255,255,255,.09);color:#fff;min-height:128px}.v11ActionCard:hover{border-color:rgba(122,247,255,.35)}.v11ActionCard b{display:block;font:900 15px system-ui;margin:8px 0 5px}.v11ActionCard small{display:block;color:#9fb0c2;font:600 10px/1.45 system-ui}.v11ActionIcon{font-size:27px}
+@media(max-width:780px){
+  :root{--v11-dock:66px}.v11ActionGrid{grid-template-columns:1fr 1fr}.v11WorldHead{align-items:flex-start}.v11WorldStats{display:none}
+  #v11WorldSwitcher{bottom:calc(var(--v11-dock) + 76px + env(safe-area-inset-bottom,0px))}
+  .actions{bottom:calc(var(--v11-dock) + 8px + env(safe-area-inset-bottom,0px))!important}
+  .quest,.event,.weather,.minimap{max-width:42vw!important}.minimap{transform:scale(.82);transform-origin:top right}
+}
+@media(max-width:520px){
+  .v11ActionGrid{grid-template-columns:1fr}.v11WorldHero{min-height:145px}.v11WorldHead{padding:9px}.v11WorldTitle p{display:none}
+  #v11WorldSwitcher button{font-size:8px;padding:9px 3px}.actions .action{font-size:9px!important;padding-inline:4px!important}
+  .bottom button:nth-child(3) span,.bottom button:nth-child(4) span{font-size:0!important}.bottom button:nth-child(3) span:after{content:'Mobil';font-size:8px}.bottom button:nth-child(4) span:after{content:'Bo';font-size:8px}
+}

@@ -1,17 +1,11 @@
-BLACK HAVEN ONLINE — V10000000 WEB RELEASE
+BLACK HAVEN ONLINE — V11000000
+Responsive Three Worlds release.
 
-Start locally:
-1. Open index.html in a modern browser.
-2. For best compatibility, serve the folder with any simple static web server.
+Changes:
+- CRIME, LIFE and EMPIRE are directly clickable full-screen worlds.
+- New persistent world switcher.
+- Mobile/responsive layout overhaul.
+- Bottom dock, action controls, sheets and buttons reflow to prevent overlap.
+- Built on the complete V10000000 release.
 
-Deploy:
-Upload index.html, styles.css, game.js and favicon.svg to the same web folder.
-
-Save data:
-Game progress is stored in browser localStorage. Use the in-game Backup & Import tools before moving between devices/browsers.
-
-Files:
-- index.html — page shell
-- styles.css — visual styles
-- game.js — game logic
-- favicon.svg — browser icon
+GitHub Pages: upload/replace all five files in the repository root.
